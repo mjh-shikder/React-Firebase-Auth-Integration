@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.active{ 
+    @apply
+    bg-blue-400
+    text-white 
+    font-semibold
+    mx-1
+}
