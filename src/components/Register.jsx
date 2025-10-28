@@ -5,6 +5,8 @@ import { auth } from "../Firebase/firebase.init";
 
 const Register = () => {
 
+  
+
   const handleRegister = e => {
     e.preventDefault()
     const email = e.target.email.value;
