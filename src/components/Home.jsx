@@ -5,8 +5,7 @@ const Home = () => {
 
     const authInfo = use(AuthContext)
     
-    console.log(authInfo);
-    
+    console.log(authInfo);   
 
 
     return (
