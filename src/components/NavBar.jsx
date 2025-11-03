@@ -6,7 +6,7 @@ const NavBar = () => {
 
   const authInfo = use(AuthContext)
 
-  console.log( 'Navbar', authInfo);
+  console.log( 'Navbar---', authInfo);
   
 
     const links = <>

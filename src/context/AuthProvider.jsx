@@ -1,12 +1,20 @@
 import React from 'react';
 import { AuthContext } from './AuthContext';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../Firebase/firebase.init';
 
 
 const AuthProvider = ({ children }) => {
+
+
+    const createUser = (email, passowrd) => {
+        
+        return createUserWithEmailAndPassword(auth, email, passowrd )
+    }
      
    
     const authInfo = {
-        user: 'ptatu@alu.vorta'
+        createUser,
     }
 
     return (
@@ -25,5 +33,5 @@ export default AuthProvider;
  * 3. ensure you use the children prop
  * 4. make sure use the auth provider in the router 
  * 5. make the create user with email and password shared via provider 
- * 6. set createUser in teh authInfo object to share via context 
+ * 6. set createUser in the authInfo object to share via context 
  */
