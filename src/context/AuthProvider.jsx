@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.init';
 
 
 const AuthProvider = ({ children }) => {
-
+const [user, setUser] = useState(null)
 
     const createUser = (email, passowrd) => {
 
@@ -15,19 +15,41 @@ const AuthProvider = ({ children }) => {
     const signInUser = (email, passowrd) => {
         return signInWithEmailAndPassword(auth, email, passowrd )
     }
-    // Get current user info 
-    onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-            console.log('inside observer: if', currentUser);
-        }
-        else {
-            console.log('inside observer: else', currentUser);
+    // // Get current user info 
+    // onAuthStateChanged(auth, (currentUser) => {
+    //     if (currentUser) {
+    //         console.log('inside observer: if', currentUser);
+    //     }
+    //     else {
+    //         console.log('inside observer: else', currentUser);
             
-        }
-    })
+    //     }
+    // })
 
+    // useEffect(()=>{}, [])
+    // useEffect(() => {
+    //     // step 1: observer set
+    //     // setp 2: set in a variable 
+    //     // setp 3: return and call teh variable so that youu can clear the reference
+    // }, [])
+    
+    useEffect(() => {
+        // set the observer 
+        const unsubsccribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log('current user in austh state change', currentUser);
+            setUser(currentUser)
+            
+        })
+        // clear the observer on unmount 
+        return () => {
+            unsubsccribe();
+        }
+    }, [])
+    
+    
    
     const authInfo = {
+        user,
         createUser,
         signInUser,
     }
