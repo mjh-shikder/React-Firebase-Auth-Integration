@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.init';
 
 
@@ -15,6 +15,12 @@ const [user, setUser] = useState(null)
     const signInUser = (email, passowrd) => {
         return signInWithEmailAndPassword(auth, email, passowrd )
     }
+
+    const signOutUser = () => {
+        return signOut(auth)
+    }
+
+
     // // Get current user info 
     // onAuthStateChanged(auth, (currentUser) => {
     //     if (currentUser) {
@@ -52,6 +58,7 @@ const [user, setUser] = useState(null)
         user,
         createUser,
         signInUser,
+        signOutUser,
     }
 
     return (
