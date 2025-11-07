@@ -5,18 +5,21 @@ import { auth } from '../Firebase/firebase.init';
 
 
 const AuthProvider = ({ children }) => {
-const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const createUser = (email, passowrd) => {
-
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, passowrd )
     }
      
     const signInUser = (email, passowrd) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, passowrd )
     }
 
     const signOutUser = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -43,7 +46,8 @@ const [user, setUser] = useState(null)
         // set the observer 
         const unsubsccribe = onAuthStateChanged(auth, (currentUser) => {
             console.log('current user in austh state change', currentUser);
-            setUser(currentUser)
+            setUser(currentUser);
+            setLoading(false);
             
         })
         // clear the observer on unmount 
@@ -56,6 +60,7 @@ const [user, setUser] = useState(null)
    
     const authInfo = {
         user,
+        loading,
         createUser,
         signInUser,
         signOutUser,
